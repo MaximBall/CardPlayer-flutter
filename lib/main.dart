@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sample APP',
+      title: 'Simple APP',
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
@@ -31,10 +31,37 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('TEXT'),
+    return Row(
+      children: <Widget>[
+        Container(
+          child: IconButton(
+            onPressed: _toggleFavorite, 
+            icon: (_isFav ? Icon(Icons.favorite) : Icon(Icons.favorite_border)),
+            color: Colors.red[500],
+          ),
+        ),
+        SizedBox(
+          width: 40,
+          child: Container(
+            child: Text('$_fav'),
+          ),
+        ),
+      ],
     );
   }
+
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFav) {
+        _isFav = false;
+        _fav -= 1;
+      } else {
+        _isFav = true;
+        _fav += 1;
+      }
+    });
+  }
+
 }
 
 
@@ -43,7 +70,7 @@ class PersonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Japony'),
+        title: Text('Card Kobi Brayan'),
       ),
       body: Container(
         child: _buildMainColumn(),
@@ -73,7 +100,7 @@ class PersonWidget extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.all(5),
-                child: Text('DEscribe'),
+                child: _buildDescribe(),
               ),
             ],
           ),
@@ -101,7 +128,9 @@ class PersonWidget extends StatelessWidget {
     title: Text(
       'Kobi Brayan',
       style: TextStyle(
-        fontWeight: FontWeight.w500
+        fontWeight: FontWeight.w500,
+        fontSize: 18.0,
+
       ),
     ),
     subtitle: Text('USA, NewYork'),
@@ -138,5 +167,14 @@ class PersonWidget extends StatelessWidget {
         ),
       )
     ],
+  );
+
+  Widget _buildDescribe() => Text(
+    'Lonzo Anderson Ball (born October 27, 1997) is an American professional basketball player'
+    'for the New Orleans Pelicans of the National Basketball Association (NBA).',
+    softWrap: true,
+    style: TextStyle(
+      fontSize: 17.0,
+    ),
   );
 }
