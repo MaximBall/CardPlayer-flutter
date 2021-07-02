@@ -61,14 +61,14 @@ class PersonWidget extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.all(5),
-                child: Text('Raiting'),
+                child: _buildRaiting(),
               ),
               Card(
                 margin: const EdgeInsets.all(5),
                 elevation: 5,
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: Text('Buttons'),
+                  child: _buildAction(),
                 ),
               ),
               Container(
@@ -91,9 +91,52 @@ class PersonWidget extends StatelessWidget {
       ),
       elevation: 5,
       child: Image.asset(
-        'assets/images/img2.jpg',
+        'assets/images/player.jpg',
         fit: BoxFit.cover,
       ),
     ),
+  );
+
+  Widget _buildRaiting() => ListTile(
+    title: Text(
+      'Kobi Brayan',
+      style: TextStyle(
+        fontWeight: FontWeight.w500
+      ),
+    ),
+    subtitle: Text('USA, NewYork'),
+    trailing: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        FavoriteWidget()
+      ],
+    ),
+  );
+
+  Widget _buildAction() => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      _buildButton('Блокирующий', Icons.star, Colors.black),
+      _buildButton('Рост 198 см', Icons.radio_button_checked, Colors.black),
+      _buildButton('Возраст 19', Icons.school, Colors.black),
+    ],
+  );
+
+  Widget _buildButton(
+      String label,
+      IconData icon, 
+      Color color) => Column(
+    children: <Widget>[
+      Icon(icon, color: Colors.black,),
+      Container(
+        child: Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            color: color,
+          ),
+        ),
+      )
+    ],
   );
 }
